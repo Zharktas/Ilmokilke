@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <script type="application/javascript">
+        function AddNew(){
+            var element = document.createElement('input');
+            element.type = 'text';
+            element.name = 'names[]';
+            element.placeholder = "Nimi";
+            document.getElementById('nameInputs').appendChild(element);
+        }
+    </script>
+</head>
+<body>
+<form class="pure-form pure-form-stacked" action="new" method="post">
+    <fieldset>
+        <label for="username">Käyttäjätunnus</label>
+        <input id="username" name="username" type="text" placeholder="Käyttäjätunnus">
+
+        <label for="password">Salasana</label>
+        <input id="password" name="password" type="password" placeholder="Salasana">
+
+        <label for="names[]">Nimet</label>
+        <div id="nameInputs">
+            <input name="names[]" type="text" placeholder="Nimi">
+        </div>
+        <a  onclick="AddNew()" class="pure-button">Lisää nimi</a>
+        <button type="submit" class="pure-button pure-button-primary">Luo uusi</button>
+    </fieldset>
+</form>
+</body>
+</html>

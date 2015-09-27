@@ -4,9 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('cookie-session');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var admin = require('./routes/admin')
 
 var passport = require('passport');
 var User = require('./lib/User');
@@ -15,9 +16,13 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+var mongoose = require('mongoose');
+
 
 
 var app = express();
+
+app.locals.title = 'Ilmokilke';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,16 +32,28 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(session({ keys: ['secretkey1', 'secretkey2', '...']}));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Configure passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Connect mongoose
+mongoose.connect('mongodb://localhost/ilmokilke', function(err) {
+    if (err) {
+        console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
+    }
+});
 
 
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
