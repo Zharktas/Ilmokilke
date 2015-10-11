@@ -8,11 +8,29 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <ul>
+
     <% registerations.forEach(function (registeration){ %>
-        <li><%= registeration %></li>
+    <dl>
+    <dt>Tunnus</dt>
+        <dd><%=registeration.username %></dd>
+        <% registeration.persons.forEach(function(person){ %>
+        <dl>
+            <dt>Nimi</dt>
+            <dd><%= person.name%></dd>
+            <dt>Läsnä</dt>
+            <dd><%= person.attending%></dd>
+            <dt>Allergiat</dt>
+            <dd><%= person.allergies%></dd>
+        </dl>
+
+        <%}) %>
+        <dt>
+            Lisätietoja
+        </dt>
+        <dd><%= registeration.additionalInfo%></dd>
+    </dl>
     <%}) %>
-    </ul>
+
     <a class="pure-button" href="registerations/new">Uusi rekisteröityminen</a>
 
 </body>

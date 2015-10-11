@@ -40,7 +40,49 @@ router.post('/login', passport.authenticate('local'), function(req, res){
 });
 
 router.get('/user/:id', ensureLoggedIn('/'), function(req, res){
-  res.render('user', {username: req.user.username, names: req.user.names});
+  console.log(req.user);
+  res.render('user', {username: req.user.username, persons: req.user.persons, id: req.user.id, additionalInfo: req.user.additionalInfo});
+});
+
+router.post('/user/:id', ensureLoggedIn('/'), function(req, res){
+  console.log(req.user);
+
+  var amount = req.body.amount;
+  console.log(amount);
+
+  var persons = [];
+
+  for ( var i = 0; i < amount; i++){
+    var nameVar = "name-" + i;
+    var attendingVar = "attending-" + i;
+    var allergiesVar = "allergies-" + i;
+
+    var person = {
+      name: req.body[nameVar],
+      attending: req.body[attendingVar],
+      allergies: req.body[allergiesVar]
+    };
+
+    persons.push(person);
+  }
+
+  var additionalInfo = req.body.additionalInfo;
+
+  console.log(req.user.id);
+  User.findById(req.user.id, function(err,user){
+    if (err){
+      console.log("error while finding document:", err)
+      return next(err);
+    }
+    console.log(user);
+    user.persons = persons;
+    user.additionalInfo = additionalInfo;
+    user.save();
+
+    console.log(user);
+  });
+
+  res.render('user', {username: req.user.username, persons: req.user.persons, id: req.user.id, additionalInfo: additionalInfo});
 });
 
 

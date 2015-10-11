@@ -8,10 +8,29 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<ul>
-    <% names.forEach(function (name){ %>
-    <li><%= name %></li>
-    <%}) %>
-</ul>
+
+<form class="pure-form pure-form-aligned"  method="post">
+    <fieldset>
+        <% persons.forEach(function (person, index){ %>
+            <div class="pure-control-group">
+                <label>Nimi</label>
+                <input type="text" value="<%= person.name %>" readonly name="name-<%= index%>">
+
+                <label class="pure-radio">Läsnä</label>
+                <input type="radio" name="attending-<%= index%>" value="true" <% if( person.attending == true ){%> checked <%}%> >Kyllä
+                <input type="radio" name="attending-<%= index%>" value="false"<% if( person.attending == false ){%> checked <%}%>>Ei
+
+                <label>Allergiat</label>
+                <input type="text" name="allergies-<%= index%>" value="<%= person.allergies %>">
+            </div>
+        <%}) %>
+    </fieldset>
+    <label>Lisätietoja</label>
+    <textarea name="additionalInfo"><%= additionalInfo %></textarea>
+    <input type="hidden" name="amount" value="<%= persons.length%>">
+    <input type="submit" value="Tallenna">
+</form>
+
+
 </body>
 </html>
