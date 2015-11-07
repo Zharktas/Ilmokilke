@@ -21,11 +21,17 @@
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^1.2.0",
+    "purecss": "^0.6.0",
     "serve-favicon": "~2.3.0"
   },
   "description": "Registration thingy",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-less": "^3.0.3",
+    "gulp-minify-css": "^1.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Zharktas/Ilmokilke.git"

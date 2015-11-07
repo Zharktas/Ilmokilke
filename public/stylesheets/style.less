@@ -6,3 +6,59 @@ body {
 a {
   color: #00B7FF;
 }
+
+.container{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 768px;
+}
+
+.pure-form-aligned {
+  .pure-control-group {
+    label.custom-label {
+      width: 5em;
+    }
+  }
+}
+
+.custom-toggle{
+  width: 34px;
+  height: 34px;
+  //position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+
+  .bar{
+    background-color: #777;
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 100px;
+    position: absolute;
+    top: 18px;
+    right: 7px;
+    transition: all 0.5s;
+
+    &:first-child{
+      transform: translateY(-6px);
+    }
+  }
+
+  &.x{
+    .bar{
+      transform: rotate(45deg);
+
+      &:first-child{
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+@media(max-width: 47.999em){
+  .custom-toggle{
+    display: block;
+  }
+
+}

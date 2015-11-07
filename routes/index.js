@@ -40,7 +40,6 @@ router.post('/login', passport.authenticate('local'), function(req, res){
 });
 
 router.get('/user/:id', ensureLoggedIn('/'), function(req, res){
-  console.log(req.user);
   res.render('user', {username: req.user.username, persons: req.user.persons, id: req.user.id, additionalInfo: req.user.additionalInfo});
 });
 
@@ -83,6 +82,22 @@ router.post('/user/:id', ensureLoggedIn('/'), function(req, res){
   });
 
   res.render('user', {username: req.user.username, persons: req.user.persons, id: req.user.id, additionalInfo: additionalInfo});
+});
+
+router.get('/arrival', ensureLoggedIn('/'), function(req, res){
+  res.render('arrival', {id: req.user.id});
+});
+
+router.get('/venue', ensureLoggedIn('/'), function(req, res){
+  res.render('venue', {id: req.user.id});
+});
+
+router.get('/program', ensureLoggedIn('/'), function(req, res){
+  res.render('program', {id: req.user.id});
+});
+
+router.get('/wishlist', ensureLoggedIn('/'), function(req, res){
+  res.render('wishlist', {id: req.user.id});
 });
 
 
