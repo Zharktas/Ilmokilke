@@ -1,30 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/purecss/build/pure-min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-</head>
+<%- include('head')-%>
 <body>
 
 
 <div class="container pure-g">
 
-    <div class="header pure-u-1">
-        <h1>Header</h1>
-    </div>
+    <%- include('header') -%>
 
-    <div class="pure-menu pure-menu-horizontal pure-u-1">
-        <a href="/user/<%= id %>" class="pure-menu-heading">Ilmoittautuminen</a>
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="/arrival" class="pure-menu-link">Saapuminen</a></li>
-            <li class="pure-menu-item"><a href="/venue" class="pure-menu-link">Juhlapaikka</a></li>
-            <li class="pure-menu-item"><a href="/program" class="pure-menu-link">Ohjelma</a></li>
-            <li class="pure-menu-item"><a href="/wishlist" class="pure-menu-link">Lahja</a></li>
-        </ul>
-    </div>
+    <%- include('nav') -%>
 
     <div class="pure-u-1">
         <p>

@@ -1,53 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/purecss/build/pure-min.css">
-    <script type="text/javascript" async src="/javascript/menu.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-</head>
+<%- include('head')-%>
 <body>
 
 
 <div class="container pure-g">
 
-    <div class="header pure-u-1">
-        <h1>Header</h1>
-    </div>
+    <%- include('header') -%>
 
 
-    <div class="menu-wrapper" id="menu">
-    <div class="pure-u-1-3">
-        <div class="pure-menu">
-            <a href="/user/<%= id %>" class="pure-menu-heading">Ilmoittautuminen</a>
-            <a href="#" class="custom-toggle" id="toggle"><s class="bar"></s><s class="bar"></s></a>
-        </div>
-    </div>
 
-    <div class="pure-u-1-3">
-    <div class="pure-menu pure-menu-horizontal">
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="/arrival" class="pure-menu-link">Saapuminen</a></li>
-            <li class="pure-menu-item"><a href="/venue" class="pure-menu-link">Juhlapaikka</a></li>
-            <li class="pure-menu-item"><a href="/program" class="pure-menu-link">Ohjelma</a></li>
-            <li class="pure-menu-item"><a href="/wishlist" class="pure-menu-link">Lahja</a></li>
-        </ul>
-    </div>
-    </div>
-    </div>
+    <%- include('nav') -%>
+
 
     <div class="pure-u-1">
-        <p>
-        Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn. Zhro shogg hupadgh ehye, h'zhro vulgtlagln h's'uhn mnahn'agl Tsathoggua throd nw shogg nnnep gotha, 'fhalma hupadgh f''ai Chaugnar Faugnyar y-ehye syha'h naflah R'lyeh. Uln naShub-Niggurath nw hlirgh ah uln sgn'wahlog ph'ep, s'uhn li'hee sgn'wahl tharanak ehye h'gof'nn f'y'hah czhro, geb ngYoggoth nilgh'ri nw vulgtm kn'a. Lw'nafh phlegeth Yoggoth mnahn' h'hafh'drn hafh'drnyar 'ai, 'bthnk y-mnahn' ee Yoggothog uaaah y-'ai cn'gha, Dagon lloig kn'a nanw fhtagn. Ch' li'hee y'hah Azathoth ebunma gnaiih vulgtlagln nglui Shub-Niggurath ch' Shub-Niggurath h'sll'ha, y-ch' cebunma vulgtm naflnw 'ai Cthulhu gotha y'hah cuh'e f'sll'ha uln ron, Shub-Niggurath hupadgh nauh'e Cthulhu ooboshu h'ep uh'e wgah'nor ron sll'ha.
-        </p>
-        <p>
-        Uln na'fhalma nilgh'ri cuh'e ep ftaghu lloig ebunma fhtagn ahor ee hafh'drn, vulgtlagln zhro f'uln vulgtlagln Tsathoggua wgah'n uln vulgtm h''ai ilyaa, lloig throd hrii goka n'gha Shub-Niggurath ph'R'lyeh lloig nastell'bsna shtunggli. Ckn'a vulgtlagln f'mg mnahn' uln chtenff ebunma goka Chaugnar Faugn, ebunmaog ngkn'a nasyha'h nnnphlegeth nggoka n'gha ep, phlegeth tharanak bug vulgtm kn'a shtunggli Hastur. Chtenff ngR'lyeh 'fhalma Chaugnar Faugn ftaghu bug nnnhupadgh uaaah uln, nilgh'ri uaaah hafh'drn f'Tsathoggua nog r'luh kadishtu k'yarnak cAzathoth, r'luhoth Shub-Niggurath ee ngs'uhn cnilgh'ri nglui lw'nafh. Natharanak tharanak phlegeth hupadgh throd orr'e fm'latgh gotha ilyaa, ron k'yarnaknyth nnnhrii tharanak zhro hrii zhro, Nyarlathotep Cthulhu nnnehye y-ron Dagon lloigoth natharanak.
-        </p>
-        <p>
-        Wgah'nyar gof'nn ngooboshu syha'h hlirgh h'vulgtm shogg uaaah cshagg ron, zhro hrii fhtagnagl y'hah ooboshu stell'bsnayar 'bthnk s'uhnog kadishtu y-nilgh'ri, zhro naflehye s'uhn nw h'ah y-ehye bug cllll. Hlirgh naorr'e kadishtu cuh'e y'hah h'tharanak goka mnahn', tharanak r'luh hafh'drn li'hee Azathoth n'gha nglui gokaor, shogg Yoggoth f'ebunma kn'a y-hlirgh naflR'lyeh. Nilgh'riog s'uhn kadishtu 'ai ebunma geb nnnlloig, f'fhtagn kadishtu 'ai uaaah hafh'drn nw, goka fm'latgh gnaiih uln h'hrii mg, s'uhn tharanak hafh'drn li'hee wgah'n. Sll'ha fhtagn hafh'drn y-uln y-phlegeth ilyaa uln nw nnnmg zhro vulgtm, ph'lloig ehye Dagon vulgtm lloig ahyar gotha f'syha'h chtenff.
-        </p>
+        <% gifts.forEach(function(gift) {%>
+            <form class="pure-form" method="post">
+                <label><%= gift.gift %></label>
+                <% if (gift.giver) {%>
+                    Varattu
+                <% } else {%>
+                    <input type="hidden" name="gift" value="<%= gift.gift %>">
+                    <button type="submit" class="pure-button pure-button-primary">Varaa</button>
+                <% } %>
+            </form>
+        <% }) %>
     </div>
 
 

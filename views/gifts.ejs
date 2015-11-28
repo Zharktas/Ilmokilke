@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<%- include('head')-%>
+<body>
+
+<% gifts.forEach(function (gift){ %>
+<dl>
+    <dt>Lahja</dt>
+    <dd><%=gift.gift%></dd>
+    <dt>
+        Antaja
+    </dt>
+    <dd><% if (gift.giver) { %> <%= gift.giver.username%> <% } %></dd>
+</dl>
+<%}) %>
+
+<form class="pure-form" method="post">
+    <fieldset>
+        <input name="gift" type="text" placeholder="Lahja">
+        <button type="submit" class="pure-button pure-button-primary">Uusi</button>
+    </fieldset>
+</form>
+
+</body>
+</html>

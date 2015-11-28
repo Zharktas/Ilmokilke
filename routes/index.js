@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../lib/User');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+var Gift = require('../lib/Gift');
 
 
 /* GET home page. */
@@ -97,7 +98,38 @@ router.get('/program', ensureLoggedIn('/'), function(req, res){
 });
 
 router.get('/wishlist', ensureLoggedIn('/'), function(req, res){
-  res.render('wishlist', {id: req.user.id});
+
+  Gift.find({}, function(err, gifts){
+    if (err){
+      console.log(err);
+      return next(err);
+    }
+
+
+    res.render('wishlist', {gifts: gifts, id: req.user.id})
+  });
+
+});
+
+router.post('/wishlist', ensureLoggedIn('/'), function(req, res, next){
+  var giftName = req.body.gift;
+  var user = req.user;
+
+  Gift.findOne({gift: giftName}, function(err, gift) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+
+    gift.giver = user._id;
+
+    gift.save(function (err) {
+      if (err) return next(err);
+
+      res.redirect('/wishlist')
+
+    })
+  });
 });
 
 
